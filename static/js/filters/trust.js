@@ -3,8 +3,19 @@
     'use strict';
 
     window.app.filter("trust", ['$sce', function($sce) {
-        return function(htmlCode){
-            return $sce.trustAsHtml(ansi_up.ansi_to_html(htmlCode));
+        return function(log){
+          var completeString = '';
+          var numberOfVars = Object.keys(log.args).length;
+          for(var i = 0; i < numberOfVars; i++) {
+            completeString += i === 0 ?
+              ansi_up.ansi_to_html(log.args[i]) + '\n' :
+              [
+                '<span class="hljs">',
+                hljs.highlight('json', JSON.stringify(log.args[i], undefined, 2), true, false).value,
+                '</span>\n'
+              ].join('');
+          }
+            return $sce.trustAsHtml(completeString);
         }
     }]);
 }());
