@@ -8,12 +8,12 @@
           var numberOfVars = Object.keys(log.args).length;
           for(var i = 0; i < numberOfVars; i++) {
             completeString += i === 0 ?
-              ansi_up.ansi_to_html(log.args[i]) + '\n' :
-              [
+              Autolinker.link( ansi_up.ansi_to_html(log.args[i]) ) + '\n' :
+              Autolinker.link( [
                 '<span class="hljs">',
                 hljs.highlight('json', JSON.stringify(log.args[i], undefined, 2), true, false).value,
                 '</span>\n'
-              ].join('');
+              ].join('') );
           }
             return $sce.trustAsHtml(completeString);
         }
