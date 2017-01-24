@@ -98,7 +98,7 @@
                  *
                  * @type {Boolean}  True to collapse the log
                  */
-                $scope.collapse = false;
+                $scope.collapse = true;
 
                 /**
                  * $scope.changeState
